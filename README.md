@@ -1,5 +1,5 @@
 
-# Java customer managmenet example
+# Java customer management example
 
 The following Java program was created as an assignement for the Object Oriented Programming 1 class of the third semester at the Harokopeio University of Athens.
 ## Briefing
