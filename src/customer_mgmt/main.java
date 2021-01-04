@@ -220,7 +220,7 @@ public class main {
     
     
     
-    /* Βοηθητικές μεθόδοι
+    /* Auxiliary Methods
     */
     public static boolean stringToBool(){
         boolean answer=false;
