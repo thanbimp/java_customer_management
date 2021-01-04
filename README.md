@@ -42,6 +42,7 @@ At this point all the discounts that a customer should have have been calculated
 * 8% if the customer has a fixed phone plan with over 1000 minutes **or** 10% if the customer has a mobile phone plan with over 1000 minutes
 * 5% if the customer pays by direct deposit or credit card
 * 2% if the customer wants an electronic bill instead of a paper one
+
 ***The discounts are only considered valid if customer has atleast one active contract and they cannot exceed 45% combined***
 ```
 This information is stored in an arrayList called CustomerList
