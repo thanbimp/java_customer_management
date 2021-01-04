@@ -18,8 +18,8 @@ public class it219148 {
     //start of test data
    customerList.add(new customer(219148,"Thanasis","Bibas",123456789,true,false,"AB123456",1,true)); 
    customerList.add(new customer(12574,"Georgios","Theodorou",987654321,false,false,"AB454647",3,false));
-   contractList.add(new mobile(true,10,150,"6984140263",219148,12,12,2022));
-   contractList.add(new fixed (true,100,550,"2104902671",219148,12,6,2022));
+   contractList.add(new mobile(true,10,150,"6980571234",219148,12,12,2022));
+   contractList.add(new fixed (true,100,550,"21045671234",219148,12,6,2022));
    //end of test data
         boolean run=true;
         int selection;
@@ -112,6 +112,7 @@ public class it219148 {
             System.out.println("Please enter customers tax ID");
             custID=findCustID(myScn.nextInt());
         }
+        if (custID!=0){
         if(input==1){
             do{
                 System.out.println("Please enter the phone number for the contract");
@@ -192,6 +193,8 @@ public class it219148 {
                 System.out.println("Contract date overlap,please try again");
             }
         }
+        }
+        System.out.println("Customer not found");
     }
     
     
