@@ -69,7 +69,8 @@ This information is stored in an arrayList called contractList with two possible
 
 ### 3.Delete Cotnract
 ***
-***NOT IMPLEMENTED***
+First,the program asks for a tax id to lookup,after it finds the specified customer,it then lists all of his/hers contacts,and numbers them,finally it asks the user which contract they want to delete
+
 
 ### 4.Display usage statistics among all customers
 ***

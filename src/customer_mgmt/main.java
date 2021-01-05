@@ -19,7 +19,7 @@ public class main {
    customerList.add(new customer(219148,"Thanasis","Bibas",123456789,true,false,"AB123456",1,true)); 
    customerList.add(new customer(12574,"Georgios","Theodorou",987654321,false,false,"AB454647",3,false));
    contractList.add(new mobile(true,10,150,"6980571234",219148,12,12,2022));
-   contractList.add(new fixed (true,100,550,"21045671234",219148,12,6,2022));
+   contractList.add(new fixed (true,100,550,"2105671234",219148,12,6,2022));
    //end of test data
         boolean run=true;
         int selection;
@@ -214,6 +214,17 @@ public class main {
         for (i=0;i<contractIndexes.size();i++){
             printContract(contractIndexes.get(i),i);
         }
+        if (contractIndexes.size()>=1){
+        System.out.println("Please choose which contract to delete");
+       int input=myScn.nextInt();
+       int TempIndex=contractIndexes.get(input-1);
+       contractList.remove(TempIndex);
+        }
+        else{
+            System.out.println("No contracts found");
+        }
+       
+       
     }
     
     public static void infoMenu(){
