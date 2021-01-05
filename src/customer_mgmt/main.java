@@ -13,7 +13,7 @@ import java.util.*;
 public class main {
    static Scanner myScn=new Scanner(System.in);
    static ArrayList<customer> customerList = new ArrayList<customer>();
-   static ArrayList<contract> contractList = new ArrayList<contract>();
+  public static ArrayList<contract> contractList = new ArrayList<contract>();
    public static void main(String[] args) {
     //start of test data
    customerList.add(new customer(219148,"Thanasis","Bibas",123456789,true,false,"AB123456",1,true)); 
@@ -34,7 +34,7 @@ public class main {
                 newContractMenu(0);
                 break;
             case 3:
-                deleteMenu();
+                deleteMenu(contractList.size());
                 break;
             case 4:
                 infoMenu();
@@ -194,12 +194,26 @@ public class main {
             }
         }
         }
+        else{
         System.out.println("Customer not found");
+    }
     }
     
     
-    public static void deleteMenu(){
-        
+    public static void deleteMenu(int size){
+        ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
+        int i=0;
+        System.out.println("Please Enter customers tax ID:");
+        int custID=findCustID(myScn.nextInt());
+        for(i=0;i<size;i++){
+            if (custID==contractList.get(i).custID){
+            contractIndexes.add(i);
+        }
+    }
+        System.out.println("The Following contracts have been found:");
+        for (i=0;i<contractIndexes.size();i++){
+            printContract(contractIndexes.get(i),i);
+        }
     }
     
     public static void infoMenu(){
@@ -347,4 +361,27 @@ public class main {
   }
   return overlap;
   }
+   
+   public static void printContract(int index,int currRun){
+       System.out.printf("%d.\n",currRun+1);
+       System.out.print("Type:");
+       if(contractList.get(index) instanceof mobile){
+           System.out.println("Mobile");
+       }
+       else if(contractList.get(index) instanceof fixed){
+           System.out.println("Fixed");
+       }
+       System.out.println("Phone Number:"+contractList.get(index).phoneNo);
+       System.out.println("Minutes:"+contractList.get(index).minutes);
+       System.out.println("Expiration Date:"+contractList.get(index).endDay+"/"+contractList.get(index).endMonth+"/"+contractList.get(index).endYear);
+       if(contractList.get(index).hasInternet){
+           System.out.print("Internet:");
+           if (contractList.get(index) instanceof mobile){
+               System.out.println(contractList.get(index).internet+" GB");
+           }
+           else  if (contractList.get(index) instanceof fixed){
+               System.out.println(contractList.get(index).internet+" Mbps");
+           }
+       }
+   }
 }
