@@ -21,7 +21,7 @@ Display specific customers active contracts
 ```
 
 ## Progress:
-Around 35%,new contract fully implemented,discount calculation missing from new customer profile
+Around 50%,new contract fully implemented,discount calculation missing from new customer profile
 
 ## Details
 ### 1.Make new customer profile
