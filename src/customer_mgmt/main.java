@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class main {
    static Scanner myScn=new Scanner(System.in);
-   static ArrayList<customer> customerList = new ArrayList<customer>();
+  static ArrayList<customer> customerList = new ArrayList<customer>();
   public static ArrayList<contract> contractList = new ArrayList<contract>();
    public static void main(String[] args) {
     //start of test data
@@ -154,7 +154,7 @@ public class main {
                 System.out.println("Contract doesnt have a value over 0,and wont be saved");
             }
             else{
-                contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
+                contractList.add(new mobile(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
             }
             }
             else{
@@ -225,7 +225,7 @@ public class main {
     }
         System.out.println("The Following contracts have been found:");
         for (i=0;i<contractIndexes.size();i++){
-            printContract(contractIndexes.get(i),i);
+            printContract(contractIndexes.get(i),i,custID);
         }
         if (contractIndexes.size()>=1){
         System.out.println("Please choose which contract to delete");
@@ -250,9 +250,18 @@ public class main {
             contractIndexes.add(i);
         }
     }
+        if(contractIndexes.size()>0){
+            
         System.out.println("The Following contracts have been found:");
         for (i=0;i<contractIndexes.size();i++){
-            printContract(contractIndexes.get(i),i);
+            printContract(contractIndexes.get(i),i,custID);
+        }
+        customerList.get(findcustIndex(custID)).refreshDiscount();
+         System.out.println("Additionally,selected customer has a total discount of:"+customerList.get(findcustIndex(custID)).getDiscount()+"%");
+        }
+        else{
+            System.out.println("No contracts found");
+            System.out.println("Additionally,selected customer has a total discount of: "+"0%"+" (No active contracts)");
         }
     }
     
@@ -399,7 +408,7 @@ public class main {
   return overlap;
   }
    
-   public static void printContract(int index,int currRun){
+   public static void printContract(int index,int currRun,int custID){
        System.out.printf("%d.\n",currRun+1);
        System.out.print("Type:");
        if(contractList.get(index) instanceof mobile){
@@ -420,5 +429,15 @@ public class main {
                System.out.println(contractList.get(index).internet+" Mbps");
            }
        }
+       }
+   public static int findcustIndex(int CustID){
+       int i;
+       for (i=0;i<customerList.size();i++){
+           if (customerList.get(i).getCustID()==CustID){
+               return i;
+           }
+       }
+       return 0;
    }
+
 }
