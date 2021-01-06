@@ -21,7 +21,7 @@ Display specific customers active contracts
 ```
 
 ## Progress:
-Around 50%,new contract fully implemented,discount calculation missing from new customer profile
+Around 75%,discount calculation missing from new customer profile
 
 ## Details
 ### 1.Make new customer profile
@@ -71,11 +71,10 @@ This information is stored in an arrayList called contractList with two possible
 ***
 First,the program asks for a tax id to lookup,after it finds the specified customer,it then lists all of his/hers contacts,and numbers them,finally it asks the user which contract they want to delete
 
-
-### 4.Display usage statistics among all customers
+### 4.Display specific customers active contracts
 ***
-***NOT IMPLEMENTED***
+Prints all the active contracts that a customer has,finding the customer using the tax id
 
-### 5.Display specific customers active contracts
+### 5.Display usage statistics among all customers
 ***
 ***NOT IMPLEMENTED***
