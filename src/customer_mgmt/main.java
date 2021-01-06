@@ -37,11 +37,14 @@ public class main {
                 deleteMenu(contractList.size());
                 break;
             case 4:
-                infoMenu();
+                showContractsMenu(contractList.size());
                 break;
             case 5:
                 run=false;
                 break;
+            case 6:
+            run=false;
+            break;
         }
     }
 }
@@ -187,7 +190,12 @@ public class main {
             }
             year=caluclateYear(duration,year,month);
             month=caluclateMonth(duration,year,month);
-            contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
+            if (minutes<=0 && internet<=0){  
+                System.out.println("Contract doesn have a value over 0,and wont be saved");
+            }
+            else{
+                contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
+            }
             }
             else{
                 System.out.println("Contract date overlap,please try again");
@@ -227,8 +235,20 @@ public class main {
        
     }
     
-    public static void infoMenu(){
-        
+    public static void showContractsMenu(int size){
+         ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
+        int i=0;
+        System.out.println("Please Enter customers tax ID:");
+        int custID=findCustID(myScn.nextInt());
+        for(i=0;i<size;i++){
+            if (custID==contractList.get(i).custID){
+            contractIndexes.add(i);
+        }
+    }
+        System.out.println("The Following contracts have been found:");
+        for (i=0;i<contractIndexes.size();i++){
+            printContract(contractIndexes.get(i),i);
+        }
     }
     
     public static void printMainMenu(){
@@ -237,8 +257,9 @@ public class main {
         System.out.println("1.Add New Customer");
         System.out.println("2.Make New Contract");
         System.out.println("3.Delete");
-        System.out.println("4.View Active Contracts & Statistics");
-        System.out.println("5.Exit");
+        System.out.println("4.View Active Contracts");
+        System.out.println("5.View Statistics");
+        System.out.println("6.Exit");
         System.out.printf("Selection: ");
 }
     
