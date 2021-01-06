@@ -150,7 +150,12 @@ public class main {
             }
             year=caluclateYear(duration,year,month);
             month=caluclateMonth(duration,year,month);
-            contractList.add(new mobile(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
+           if (minutes<=0 && internet<=0){  
+                System.out.println("Contract doesnt have a value over 0,and wont be saved");
+            }
+            else{
+                contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
+            }
             }
             else{
                 System.out.println("Contract date overlap,please try again");
@@ -191,7 +196,7 @@ public class main {
             year=caluclateYear(duration,year,month);
             month=caluclateMonth(duration,year,month);
             if (minutes<=0 && internet<=0){  
-                System.out.println("Contract doesn have a value over 0,and wont be saved");
+                System.out.println("Contract doesnt have a value over 0,and wont be saved");
             }
             else{
                 contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
