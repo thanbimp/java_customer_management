@@ -7,7 +7,11 @@ package customer_mgmt;
 
 import static customer_mgmt.main.contractList;
 import static customer_mgmt.main.customerList;
+import static customer_mgmt.main.getContractIndex;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -37,9 +41,9 @@ public class customer {
     this.IDnum=IDnum;
     this.paymentMethod=paymentMethod;
     this.eBill=eBill;
-    int noOfContracts=getNoOfContracts(this.custID);
-    int over1000mins=checkfor1000mins(this.custID,contractList.size());
-    discount=calculateDIscount(noOfContracts>0,noOfContracts,this.custID,this.isStudent,this.isPro,over1000mins,this.paymentMethod,this.eBill);
+    int noOfContracts;
+    int over1000mins;
+    int discount;
     }
     public int getCustID() {
         return custID;
@@ -113,7 +117,7 @@ public class customer {
     public void refreshDiscount() {
         int noOfContracts=getNoOfContracts(this.custID);
         int over1000mins=checkfor1000mins(this.custID,contractList.size());
-        this.discount =calculateDIscount(noOfContracts>0,noOfContracts,this.custID,this.isStudent,this.isPro,over1000mins,this.paymentMethod,this.eBill); ;
+        this.discount =calculateDIscount(noOfContracts>0,getActivecontracts(custID),this.custID,this.isStudent,this.isPro,over1000mins,this.paymentMethod,this.eBill); ;
     }
 
     
@@ -229,6 +233,31 @@ public class customer {
              }
          }
          return type;
+}
+public int getActivecontracts(int CustID){
+    int activecontracts=0;
+    int i=0;
+    ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
+      for(i=0;i<contractList.size();i++){
+            if (custID==contractList.get(i).custID){
+            contractIndexes.add(i);
+        }
+      }
+      for(i=0;i<contractIndexes.size();i++){
+          Calendar endDate = Calendar.getInstance();
+          endDate.set(Calendar.DATE,11);
+          endDate.set(Calendar.MONTH, 10);
+          endDate.set(Calendar.YEAR, 2013);
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(Calendar.YEAR, contractList.get(contractIndexes.get(i)).startYear);
+        startDate.set(Calendar.MONTH,contractList.get(contractIndexes.get(i)).startMonth);
+        startDate.set(Calendar.DAY_OF_MONTH,contractList.get(contractIndexes.get(i)).startDay);
+        Calendar currentDate=Calendar.getInstance();
+        if(startDate.before(currentDate) && endDate.after(currentDate)){
+            activecontracts++;
+        }
+      }
+      return activecontracts;
 }
 
 }

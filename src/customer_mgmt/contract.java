@@ -6,6 +6,7 @@
 package customer_mgmt;
 
 import static customer_mgmt.main.contractList;
+import java.util.Calendar;
 
 /**
  *
@@ -20,19 +21,12 @@ public class contract{
     int endDay;
     int endMonth;
     int endYear;
+    int startDay;
+    int startMonth;
+    int startYear;
     
-    /**
-     *
-     * @param hasInternet
-     * @param internet
-     * @param minutes
-     * @param phoneNo
-     * @param custID
-     * @param endDay
-     * @param endMonth
-     * @param endYear
-     */
-    public contract (boolean hasInternet,float internet,int minutes,String phoneNo,int custID,int endDay,int endMonth,int endYear){
+
+    public contract (boolean hasInternet,float internet,int minutes,String phoneNo,int custID,int startDay,int startMonth,int startYear,int endDay,int endMonth,int endYear){
     this.hasInternet=hasInternet;
     this.internet=internet;
     this.minutes=minutes;
@@ -41,6 +35,9 @@ public class contract{
     this.endDay=endDay;
     this.endMonth=endMonth;
     this.endYear=endYear;
+    this.startDay=startDay;
+    this.startMonth=startMonth;
+    this.startYear=startYear;
     }
 
     /**
@@ -163,15 +160,15 @@ public class contract{
     public int getEndYear() {
         return endYear;
     }
-   
+      
 }
 
     
    
 class fixed extends contract{
         
-    public fixed(boolean hasInternet, float internet, int minutes, String phoneNo, int custID,int endDay,int endMonth,int endYear) {
-        super(hasInternet, internet, minutes, phoneNo, custID, endDay,endMonth,endYear);
+    public fixed(boolean hasInternet, float internet, int minutes, String phoneNo,int custID,int startDay,int startMonth,int startYear,int endDay,int endMonth,int endYear) {
+        super(hasInternet, internet, minutes, phoneNo, custID,startDay,startMonth,startYear, endDay,endMonth,endYear);
     }
         public static  boolean validNumber(String phoneNo){
     if ((phoneNo.startsWith("2")) && (phoneNo.length()==10)){
@@ -185,8 +182,8 @@ class fixed extends contract{
 
 class mobile extends contract{
    
-    public mobile(boolean hasInternet, float internet, int minutes, String phoneNo, int custID,int endDay,int endMonth,int endYear) {
-        super(hasInternet, internet, minutes, phoneNo, custID,endDay,endMonth,endYear);
+   public mobile(boolean hasInternet, float internet, int minutes, String phoneNo,int custID,int startDay,int startMonth,int startYear,int endDay,int endMonth,int endYear) {
+        super(hasInternet, internet, minutes, phoneNo, custID,startDay,startMonth,startYear, endDay,endMonth,endYear);
     }
     public static  boolean validNumber(String phoneNo){
     if ((phoneNo.startsWith("69")) && (phoneNo.length()==10)){
@@ -196,5 +193,4 @@ class mobile extends contract{
     }
     return false;
 }
-
     }

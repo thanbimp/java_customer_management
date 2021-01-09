@@ -18,8 +18,8 @@ public class main {
     //start of test data
    customerList.add(new customer(219148,"Thanasis","Bibas",123456789,true,false,"AB123456",1,true)); 
    customerList.add(new customer(12574,"Georgios","Theodorou",987654321,false,false,"AB454647",3,false));
-   contractList.add(new mobile(true,10,150,"6980571234",219148,12,12,2022));
-   contractList.add(new fixed (true,100,550,"2105671234",219148,12,6,2022));
+   contractList.add(new mobile(true,10,150,"6980571234",219148,12,12,2020,12,12,2022));
+   contractList.add(new fixed (true,100,550,"2105671234",219148,12,12,2020,12,6,2022));
    //end of test data
         boolean run=true;
         int selection;
@@ -105,6 +105,8 @@ public class main {
         int duration = 0;
         int month = 0;
         int minutes=0;
+        int endYear=0;
+        int endMonth=0;
         boolean correctDuration=false;
         boolean checkForDate=false;
         boolean proceed=true;
@@ -148,13 +150,13 @@ public class main {
                 System.out.println("Please enter amount of internet in GB (If less than 1GB,enter as decimal (e.g 0,5))");
                 internet=myScn.nextFloat();
             }
-            year=caluclateYear(duration,year,month);
-            month=caluclateMonth(duration,year,month);
+            endYear=caluclateYear(duration,year,month);
+            endMonth=caluclateMonth(duration,year,month);
            if (minutes<=0 && internet<=0){  
                 System.out.println("Contract doesnt have a value over 0,and wont be saved");
             }
             else{
-                contractList.add(new mobile(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
+                contractList.add(new mobile(hasInternet,internet,minutes,phoneNo,custID,day,month,year,day,endMonth,endYear));
             }
             }
             else{
@@ -193,13 +195,13 @@ public class main {
                 System.out.println("Please enter internet speed in Mbps");
                 internet=myScn.nextFloat();
             }
-            year=caluclateYear(duration,year,month);
-            month=caluclateMonth(duration,year,month);
+            endYear=caluclateYear(duration,year,month);
+            endMonth=caluclateMonth(duration,year,month);
             if (minutes<=0 && internet<=0){  
                 System.out.println("Contract doesnt have a value over 0,and wont be saved");
             }
             else{
-                contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year));
+                contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year,day,endMonth,endYear));
             }
             }
             else{
@@ -241,7 +243,7 @@ public class main {
     }
     
     public static void showContractsMenu(int size){
-         ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
+        ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
         int i=0;
         System.out.println("Please Enter customers tax ID:");
         int custID=findCustID(myScn.nextInt());
@@ -419,6 +421,7 @@ public class main {
        }
        System.out.println("Phone Number:"+contractList.get(index).phoneNo);
        System.out.println("Minutes:"+contractList.get(index).minutes);
+       System.out.println("Start Date:"+contractList.get(index).startDay+"/"+contractList.get(index).startMonth+"/"+contractList.get(index).startYear);
        System.out.println("Expiration Date:"+contractList.get(index).endDay+"/"+contractList.get(index).endMonth+"/"+contractList.get(index).endYear);
        if(contractList.get(index).hasInternet){
            System.out.print("Internet:");
