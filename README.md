@@ -77,4 +77,4 @@ Prints all the active contracts that a customer has,finding the customer using t
 
 ### 5.Display usage statistics among all customers
 ***
-***NOT IMPLEMENTED***
+Displays the amount of subscribers for fixed and for mobile,and the min max and mean amounts of internet and minutes for fixed and mobile
