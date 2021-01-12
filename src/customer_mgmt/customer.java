@@ -222,8 +222,7 @@ public class customer {
    
      }
      private int checkfor1000mins (int custID,int size){
-         boolean exists;
-         int i=0;
+         int i;
          int type=0;
           ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
          for(i=0;i<size;i++){
@@ -232,8 +231,8 @@ public class customer {
         }
      }
          for(i=0;i<contractIndexes.size();i++){
+             if (contractList.get(contractIndexes.get(i)).isActive){
              if(contractList.get(contractIndexes.get(i)).minutes>1000){
-                 exists=true;
                  if(contractList.get(contractIndexes.get(i)) instanceof mobile){
                      type=1;
                  }
@@ -241,6 +240,7 @@ public class customer {
                      type=2;
                  }
              }
+         }
          }
          return type;
 }
@@ -268,6 +268,7 @@ public int getActivecontracts(int CustID){
       int TotalStartDate=(StartYear*365)+(StartMonth*30)+(StartDay);
        if(TotalSystemDate>=TotalStartDate && TotalSystemDate<=TotalEndDate) {
             activecontracts++;
+            contractList.get(contractIndexes.get(i)).setIsActive(true);
         }
       }
       return activecontracts;

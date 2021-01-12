@@ -42,7 +42,7 @@ public class main {
                 showContractsMenu(contractList.size());
                 break;
             case 5:
-                run=false;
+                statisticsMenu(contractList.size());
                 break;
             case 6:
             run=false;
@@ -149,9 +149,8 @@ public class main {
             System.out.println("Does customer want internet?(y/n)");
             hasInternet=stringToBool();
             if (hasInternet){
-                System.out.println("Please enter amount of internet in GB (If less than 1GB,enter as decimal (e.g 0,5))");
+                System.out.println("Please enter amount of internet in GB (If less than 1GB,enter as decimal with a comma (e.g 0,5),othewise program will crash!)");
                 internet=myScn.nextFloat();
-            }
             endYear=caluclateYear(duration,year,month);
             endMonth=caluclateMonth(duration,year,month);
            if (minutes<=0 && internet<=0){  
@@ -217,7 +216,7 @@ public class main {
         System.out.println("Customer not found");
     }
     }
-    
+    }
     
     public static void deleteMenu(int size){
         ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
@@ -446,5 +445,85 @@ public class main {
        }
        return 0;
    }
+
+    private static void statisticsMenu(int size) {
+        int minminutesfixed=999999999;
+        int maxminutesfixed=0;
+        int summinutesfixed=0;
+        int mininternetfixed=999999999;
+        int maxinternetfixed=0;
+        int suminternetfixed=0;
+        int amountfixed=0;
+        int minminutesmobile=999999999;
+        int maxminutesmobile=0;
+        int summinutesmobile=0;
+        float mininternetmobile=999999999;
+        float maxinternetmobile=0;
+        float suminternetmobile=0;
+        int amountmobile=0;
+        int i;
+        float mobAvgMinutes=0;
+        float mobAvgInternet=0;
+        float fixAvgMinutes=0;
+        float fixAvgInternet=0;
+        for (i=0;i<size;i++){
+            if(contractList.get(i) instanceof mobile){
+                amountmobile++;
+                int curContractMinutes=contractList.get(i).getMinutes();
+                summinutesmobile=summinutesmobile+curContractMinutes;
+                if (curContractMinutes<minminutesmobile){
+                    minminutesmobile=curContractMinutes;
+                }
+                 if (curContractMinutes>maxminutesmobile){
+                    maxminutesmobile=curContractMinutes;
+                }
+                float curContractInternet=contractList.get(i).getInternet();
+                suminternetmobile=suminternetmobile+curContractInternet;
+                if (curContractInternet<mininternetmobile){
+                    mininternetmobile=curContractInternet;
+                }
+                 if (curContractInternet>maxinternetmobile){
+                    maxinternetmobile=curContractInternet;
+                }
+            }
+            if(contractList.get(i) instanceof fixed){
+                amountfixed++;
+                int curContractMinutes=contractList.get(i).getMinutes();
+                summinutesfixed=summinutesfixed+curContractMinutes;
+                if (curContractMinutes<minminutesfixed){
+                    minminutesfixed=curContractMinutes;
+                }
+                 if (curContractMinutes>maxminutesfixed){
+                    maxminutesfixed=curContractMinutes;
+                }
+                int curContractInternet=(int)contractList.get(i).getInternet();
+                suminternetfixed=suminternetfixed+curContractInternet;
+                if (curContractInternet<mininternetfixed){
+                    mininternetfixed=curContractInternet;
+                }
+                 if (curContractInternet>maxinternetfixed){
+                    maxinternetfixed=curContractInternet;
+                }
+            }
+        }
+        mobAvgInternet=suminternetmobile/amountmobile;
+        mobAvgMinutes=summinutesmobile/amountmobile;
+        fixAvgInternet=suminternetfixed/amountfixed;
+        fixAvgMinutes=summinutesfixed/amountfixed;
+        System.out.println("------------------------------------------------------------");
+        System.out.println("MOBILE:");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Amount of subscribers: "+amountmobile);
+        System.out.println("Average minutes of subscribers: "+mobAvgMinutes+" Minimum amount of minutes on a contract: "+minminutesmobile+" Maximum amount of minutes on a contract: "+maxminutesmobile);
+        System.out.println("Average internet of subscribers: "+mobAvgInternet+" Minimum amount of internet on a contract: "+mininternetmobile+" Maximum amount of internet on a contract: "+maxinternetmobile);
+        System.out.println("------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("FIXED:");
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Amount of subscribers: "+amountfixed);
+        System.out.println("Average minutes of subscribers: "+fixAvgMinutes+" Minimum amount of minutes on a contract: "+minminutesfixed+" Maximum amount of minutes on a contract: "+maxminutesfixed);
+        System.out.println("Average internet of subscribers: "+fixAvgInternet+" Minimum amount of internet on a contract: "+mininternetfixed+" Maximum amount of internet on a contract: "+maxinternetfixed);
+        System.out.println("------------------------------------------------------------");
+    }
 
 }

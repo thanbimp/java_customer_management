@@ -6,7 +6,6 @@
 package customer_mgmt;
 
 import static customer_mgmt.main.contractList;
-import java.util.Calendar;
 
 /**
  *
@@ -24,6 +23,7 @@ public class contract{
     int startDay;
     int startMonth;
     int startYear;
+    boolean isActive;
     
 
     public contract (boolean hasInternet,float internet,int minutes,String phoneNo,int custID,int startDay,int startMonth,int startYear,int endDay,int endMonth,int endYear){
@@ -171,6 +171,14 @@ public class contract{
 
     public int getStartYear() {
         return startYear;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
     }
       
 }
