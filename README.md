@@ -21,7 +21,7 @@ Display specific customers active contracts
 ```
 
 ## Progress:
-Around 75%,discount calculation missing from new customer profile
+Complete!
 
 ## Details
 ### 1.Make new customer profile
