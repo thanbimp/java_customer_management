@@ -20,6 +20,8 @@ public class main {
    customerList.add(new customer(12574,"Georgios","Theodorou",987654321,false,false,"AB454647",3,false));
    contractList.add(new mobile(true,10,150,"6980571234",219148,12,12,2020,12,12,2022));
    contractList.add(new fixed (true,100,550,"2105671234",219148,12,12,2020,12,6,2022));
+   customerList.get(findcustIndex(219148)).refreshDiscount();
+   customerList.get(findcustIndex(12574)).refreshDiscount();
    //end of test data
         boolean run=true;
         int selection;
@@ -157,6 +159,7 @@ public class main {
             }
             else{
                 contractList.add(new mobile(hasInternet,internet,minutes,phoneNo,custID,day,month,year,day,endMonth,endYear));
+                 customerList.get(findcustIndex(custID)).refreshDiscount();
             }
             }
             else{
@@ -202,6 +205,7 @@ public class main {
             }
             else{
                 contractList.add(new fixed(hasInternet,internet,minutes,phoneNo,custID,day,month,year,day,endMonth,endYear));
+               customerList.get(findcustIndex(custID)).refreshDiscount();
             }
             }
             else{
@@ -234,6 +238,7 @@ public class main {
        int input=myScn.nextInt();
        int TempIndex=contractIndexes.get(input-1);
        contractList.remove(TempIndex);
+       customerList.get(findcustIndex(custID)).refreshDiscount();
         }
         else{
             System.out.println("No contracts found");
@@ -258,7 +263,6 @@ public class main {
         for (i=0;i<contractIndexes.size();i++){
             printContract(contractIndexes.get(i),i,custID);
         }
-        customerList.get(findcustIndex(custID)).refreshDiscount();
          System.out.println("Additionally,selected customer has a total discount of:"+customerList.get(findcustIndex(custID)).getDiscount()+"%");
         }
         else{

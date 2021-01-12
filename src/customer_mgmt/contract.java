@@ -160,6 +160,18 @@ public class contract{
     public int getEndYear() {
         return endYear;
     }
+
+    public int getStartDay() {
+        return startDay;
+    }
+
+    public int getStartMonth() {
+        return startMonth;
+    }
+
+    public int getStartYear() {
+        return startYear;
+    }
       
 }
 

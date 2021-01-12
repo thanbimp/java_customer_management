@@ -200,6 +200,16 @@ public class customer {
     }
     return totalDiscount;
 }
+    Calendar cal = Calendar.getInstance();
+    private int getSystemDay(){
+        return cal.get(Calendar.DAY_OF_MONTH);
+    }
+    private int getSystemMonth(){
+        return cal.get(Calendar.MONTH);
+    }
+    private int getSystemYear(){
+        return cal.get(Calendar.YEAR);
+    }
      private int getNoOfContracts(int custID){
          ArrayList <Integer> contractIndexes= new ArrayList<Integer>();
         int i=0;
@@ -243,17 +253,20 @@ public int getActivecontracts(int CustID){
             contractIndexes.add(i);
         }
       }
+      int SystemDay=getSystemDay();
+      int SystemMonth=getSystemMonth();
+      int SystemYear=getSystemYear();
+      int TotalSystemDate=(SystemYear*365)+(SystemMonth*30)+(SystemDay);
       for(i=0;i<contractIndexes.size();i++){
-          Calendar endDate = Calendar.getInstance();
-          endDate.set(Calendar.DATE,11);
-          endDate.set(Calendar.MONTH, 10);
-          endDate.set(Calendar.YEAR, 2013);
-        Calendar startDate = Calendar.getInstance();
-        startDate.set(Calendar.YEAR, contractList.get(contractIndexes.get(i)).startYear);
-        startDate.set(Calendar.MONTH,contractList.get(contractIndexes.get(i)).startMonth);
-        startDate.set(Calendar.DAY_OF_MONTH,contractList.get(contractIndexes.get(i)).startDay);
-        Calendar currentDate=Calendar.getInstance();
-        if(startDate.before(currentDate) && endDate.after(currentDate)){
+      int EndDay=contractList.get(i).getEndDay();
+      int EndMonth=contractList.get(i).getEndMonth();
+      int EndYear=contractList.get(i).getEndYear();
+      int TotalEndDate=(EndYear*365)+(EndMonth*30)+(EndDay);
+      int StartDay=contractList.get(i).getStartDay();
+      int StartMonth=contractList.get(i).getStartMonth();
+      int StartYear=contractList.get(i).getStartYear();
+      int TotalStartDate=(StartYear*365)+(StartMonth*30)+(StartDay);
+       if(TotalSystemDate>=TotalStartDate && TotalSystemDate<=TotalEndDate) {
             activecontracts++;
         }
       }
