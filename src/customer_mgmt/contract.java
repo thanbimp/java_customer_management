@@ -1,6 +1,6 @@
 package customer_mgmt;
 
-import static customer_mgmt.Main.contractList;
+import static customer_mgmt.main.contractList;
 
 /**
  *

@@ -1,7 +1,7 @@
 package customer_mgmt;
 
-import static customer_mgmt.Main.contractList;
-import static customer_mgmt.Main.customerList;
+import static customer_mgmt.main.contractList;
+import static customer_mgmt.main.customerList;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
