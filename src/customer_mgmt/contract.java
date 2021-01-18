@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package customer_mgmt;
 
-import static customer_mgmt.main.contractList;
+import static customer_mgmt.Main.contractList;
 
 /**
  *
@@ -24,9 +19,12 @@ public class contract{
     int startMonth;
     int startYear;
     boolean isActive;
+    float cost;
+    int noOfContract;
     
 
     public contract (boolean hasInternet,float internet,int minutes,String phoneNo,int custID,int startDay,int startMonth,int startYear,int endDay,int endMonth,int endYear){
+    this.isActive = false;
     this.hasInternet=hasInternet;
     this.internet=internet;
     this.minutes=minutes;
@@ -38,94 +36,63 @@ public class contract{
     this.startDay=startDay;
     this.startMonth=startMonth;
     this.startYear=startYear;
+    cost=calulateCost();
+    noOfContract=customer.getNoOfContracts(custID)+1;//offset number of contracts by one,because cintract count starts from zero
     }
 
-    /**
-     *
-     * @return
-     */
+    public float getCost() {
+        return cost;
+    }
+
+
     public float  getInternet() {
         return internet;
     }
 
-    /**
-     *
-     * @param internet
-     */
+
     public void setInternet(int internet) {
         this.internet = internet;
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isHasInternet() {
         return hasInternet;
     }
 
-    /**
-     *
-     * @param hasInternet
-     */
     public void setHasInternet(boolean hasInternet) {
         this.hasInternet = hasInternet;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getMinutes() {
         return minutes;
     }
 
-    /**
-     *
-     * @param minutes
-     */
+
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String getPhoneNo() {
         return phoneNo;
     }
 
-    /**
-     *
-     * @param phoneNo
-     */
+
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public int getCustID() {
         return custID;
     }
 
-    /**
-     *
-     * @param custID
-     */
+
     public void setCustID(int custID) {
         this.custID = custID;
     }
 
-    /**
-     *
-     * @param phoneNo
-     * @return
-     */
-    public static boolean numberExists(String phoneNo){
+ 
+    public static boolean numberExists(String phoneNo){ //check if number exists
         int i;
         for (i=0; i<contractList.size(); i++){
            String tempPhNo;
@@ -137,26 +104,17 @@ public class contract{
         return false;
     }
 
-    /**
-     *
-     * @return
-     */
+  
     public int getEndDay() {
         return endDay;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public  int getEndMonth() {
         return endMonth;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public int getEndYear() {
         return endYear;
     }
@@ -181,6 +139,24 @@ public class contract{
         return isActive;
     }
       
+    private float calulateCost(){
+        float costOfMins;
+        float MinutePrice = 0.02f;
+        float costOfInternet = 0;
+        float GBPrice = 1.5f;
+        float MBPSPrice=0.3f;
+        costOfMins=this.minutes*MinutePrice;
+        if(this instanceof mobile){ //if mobile use gigabyte cost
+        costOfInternet=this.internet*GBPrice;
+        }
+        if (this instanceof fixed){
+            costOfInternet=internet*MBPSPrice; //if fixed use mbps cost
+        }
+        return costOfMins+costOfInternet;
+    }
+    public String findLineType() {
+       return null; //placeholder
+    }
 }
 
     
@@ -189,8 +165,8 @@ class fixed extends contract{
         
     public fixed(boolean hasInternet, float internet, int minutes, String phoneNo,int custID,int startDay,int startMonth,int startYear,int endDay,int endMonth,int endYear) {
         super(hasInternet, internet, minutes, phoneNo, custID,startDay,startMonth,startYear, endDay,endMonth,endYear);
-    }
-        public static  boolean validNumber(String phoneNo){
+    } String LineType=findLineType();
+        public static  boolean validNumber(String phoneNo){ //checks if number has ten digits and starts from 2
     if ((phoneNo.startsWith("2")) && (phoneNo.length()==10)){
         return true;
     }else{
@@ -198,6 +174,22 @@ class fixed extends contract{
     }
     return false;
 }
+    @Override
+    public String findLineType() { //gets internet speed and returns line type
+        String temp="";
+        if(this.internet<=24){
+            temp="ADSL";
+        }
+        else if (this.internet <=200){
+            temp="VDSL";
+        }
+        else if (this.internet >200){
+            temp="Fiber to the home";
+        }
+        return temp;
+    }
+
+
     }
 
 class mobile extends contract{
@@ -205,7 +197,7 @@ class mobile extends contract{
    public mobile(boolean hasInternet, float internet, int minutes, String phoneNo,int custID,int startDay,int startMonth,int startYear,int endDay,int endMonth,int endYear) {
         super(hasInternet, internet, minutes, phoneNo, custID,startDay,startMonth,startYear, endDay,endMonth,endYear);
     }
-    public static  boolean validNumber(String phoneNo){
+    public static  boolean validNumber(String phoneNo){ //checks if number is 10 digits and starts with 69
     if ((phoneNo.startsWith("69")) && (phoneNo.length()==10)){
         return true;
     }else{
