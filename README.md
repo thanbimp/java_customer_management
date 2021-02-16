@@ -67,7 +67,7 @@ and mobile phone numbers start with 69
 This information is stored in an arrayList called contractList with two possible types:mobile and fixed
 ```
 
-### 3.Delete Cotnract
+### 3.Delete Contract
 ***
 First,the program asks for a tax id to lookup,after it finds the specified customer,it then lists all of his/hers contacts,and numbers them,finally it asks the user which contract they want to delete
 
